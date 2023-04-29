@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public enum EnemyState { GUARD, PATROL, CHASE, DEAD }
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CharacterStats))]
 public class EnemyController : MonoBehaviour, IEndGameObserver {
     private NavMeshAgent agent;
     private EnemyState enemyState;
@@ -18,7 +19,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver {
     public bool isGuard;
     public float lookAtTime;
     private float speed;
-    private GameObject attackTarget;
+    protected GameObject attackTarget;
     private float remainLookAtTime;
     private float lastAttackTime;
 
@@ -56,14 +57,18 @@ public class EnemyController : MonoBehaviour, IEndGameObserver {
             enemyState = EnemyState.PATROL;
             wayPoint = GetNewWayPoint();
         }
-    }
-
-    void OnEnable() {
+        // FIX: 场景切换后修改掉
         GameManager.Instance.AddObserver(this);
     }
 
+    void OnEnable() {
+        
+    }
+
     void OnDisable() {
-        GameManager.Instance.RemoveObserver(this);
+        if (GameManager.IsInitialized) {
+            GameManager.Instance.RemoveObserver(this);
+        }
     }
 
     void Update() {
@@ -146,9 +151,9 @@ public class EnemyController : MonoBehaviour, IEndGameObserver {
             agent.speed = speed;
         }
 
-        // DONE: 在攻击范围内就攻击 
         if(TargetInAttackRange() || TargetInSkillRange()) {
             isFollow = false;
+            // 攻击时不能平移
             agent.isStopped = true;
 
             if (lastAttackTime < 0) {
@@ -191,6 +196,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver {
             agent.isStopped = false;
             agent.destination = guardPos;
 
+            // 回到守卫的位置，并用线性插值平缓进行旋转
             if (Vector3.SqrMagnitude(guardPos - transform.position) <= agent.stoppingDistance) {
                 isWalk = false;
                 transform.rotation = Quaternion.Lerp(transform.rotation, guardRotation, 0.01f);
@@ -206,13 +212,13 @@ public class EnemyController : MonoBehaviour, IEndGameObserver {
 
     void Attack() {
         transform.LookAt(attackTarget.transform);
+        
         // 近战攻击动画
         if (TargetInAttackRange()) {
             animator.SetTrigger("Attack");
         }
-        // TODO: 技能攻击动画
         if (TargetInSkillRange()) {
-
+            animator.SetTrigger("Skill");
         }
     }
 
@@ -220,7 +226,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver {
 
 #region 事件函数
     void Hit() {
-        if (attackTarget != null) {
+        if (attackTarget != null && transform.isFacingTarget(attackTarget.transform)) {
             var targetState = attackTarget.GetComponent<CharacterStats>();
             targetState.TakeDamage(characterStats, targetState);
         }

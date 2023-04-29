@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject attackTarget;
     private float lastAttackTime = 0.5f;
     private CharacterStats characterStats;
-    bool isDead;
+    private bool isDead;
 
 #region 生命周期函数
     // Awake is called before the first frame update
@@ -35,9 +36,15 @@ public class PlayerController : MonoBehaviour {
         }
         SwitchAnimation();
         lastAttackTime -= Time.deltaTime;
+        // 如果死亡就注销事件
+        if (isDead) {
+            MouseManager.Instance.OnMouseClicked -= MoveToTarget;
+            MouseManager.Instance.OnEnemyClicked -= EventAttack;
+        }
     }
 
 #endregion
+
 
 #region 切换函数
     private void SwitchAnimation() {
@@ -46,9 +53,11 @@ public class PlayerController : MonoBehaviour {
     }
 #endregion
 
+
 #region 事件函数
     public void MoveToTarget(Vector3 target) {
         StopAllCoroutines();
+        
         agent.isStopped = false;
         agent.destination = target;
     }
@@ -67,6 +76,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 #endregion
+
 
 #region 辅助函数
     // 协程

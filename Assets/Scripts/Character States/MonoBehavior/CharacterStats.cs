@@ -4,8 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour {
-    public CharacterData_SO characterData;
+    public CharacterData_SO templateData;
+    private CharacterData_SO characterData;
     public AttackData_SO attackData;
+
+#region 生命周期
+    void Awake() {
+        // 深拷贝
+        if (templateData != null) {
+            characterData = Instantiate(templateData);
+        }
+    }
+
+#endregion
 
 #region Read from CharacterData_SO
     public int MaxHealth {
@@ -48,6 +59,9 @@ public class CharacterStats : MonoBehaviour {
         if (attackData.isCritical) {
             coreDamage *= attackData.criticalMultiplier;
             Debug.Log("暴击！ " + coreDamage);
+        }
+        else {
+            Debug.Log("未暴击！ " + coreDamage);
         }
         return (int)coreDamage;
     }

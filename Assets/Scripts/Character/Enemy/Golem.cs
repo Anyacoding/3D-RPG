@@ -6,7 +6,10 @@ using UnityEngine.AI;
 public class Golem : EnemyController  {
     [Header("Skill")]
     public float kickForce = 10;
+    public GameObject rockPrefab;
+    public Transform handPos;
 
+#region 动画事件
     public void kickOff() {
         if (attackTarget != null && transform.isFacingTarget(attackTarget.transform)) {
             transform.LookAt(attackTarget.transform);
@@ -17,7 +20,24 @@ public class Golem : EnemyController  {
             attackTarget.GetComponent<NavMeshAgent>().isStopped = true;
             attackTarget.GetComponent<NavMeshAgent>().velocity = direction * kickForce;
 
+            Debug.Log(direction * kickForce);
+            Debug.Log($"agent: {attackTarget.GetComponent<NavMeshAgent>().velocity}");
+
             attackTarget.GetComponent<Animator>().SetTrigger("Dizzy");
         }
     }
+
+    public void ThrowRock() {
+        var rock = Instantiate(rockPrefab, handPos.position, Quaternion.identity);
+        
+        if (attackTarget != null) {
+            rock.GetComponent<Rock>().target = attackTarget;
+        }
+        if (attackTarget == null) {
+            rock.GetComponent<Rock>().target = FindObjectOfType<PlayerController>().gameObject;
+        }
+    }
+
+#endregion
+
 }

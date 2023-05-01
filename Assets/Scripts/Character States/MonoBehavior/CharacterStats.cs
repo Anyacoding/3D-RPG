@@ -7,8 +7,9 @@ public class CharacterStats : MonoBehaviour {
     public CharacterData_SO templateData;
     private CharacterData_SO characterData;
     public AttackData_SO attackData;
+    public event Action<int, int> UpdateHealthBarOnAttack;
 
-#region 生命周期
+    #region 生命周期
     void Awake() {
         // 深拷贝
         if (templateData != null) {
@@ -50,7 +51,17 @@ public class CharacterStats : MonoBehaviour {
             defender.GetComponent<Animator>().SetTrigger("Hit");
         }
 
-        // TODO: Update UI
+        // DONE: Update UI
+        UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
+        // TODO: 经验升级
+    }
+
+    public void TakeDamage(int damage, CharacterStats defender) {
+        int currentDamage = Math.Max(damage - CurrentDefence, 0);
+        CurrentHealth = Math.Max(CurrentHealth - currentDamage, 0);
+
+        // DONE: Update UI
+        UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
         // TODO: 经验升级
     }
 

@@ -277,9 +277,6 @@ public class EnemyController : MonoBehaviour, IEndGameObserver {
 
 #region 实现观察者接口
     public void EndNotify() {
-        // TODO: 获胜动画
-        // TODO: 停止所有移动
-        // TODO: 停止Agent
         isChase = false;
         isWalk = false;
         isFollow = false;

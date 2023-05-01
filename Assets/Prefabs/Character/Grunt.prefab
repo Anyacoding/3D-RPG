@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 763360702422135545}
   - component: {fileID: 763360702422135546}
   - component: {fileID: 763360702422135547}
+  - component: {fileID: 8013895971436690034}
   m_Layer: 7
   m_Name: Grunt
   m_TagString: Enemy
@@ -278,6 +279,7 @@ Transform:
   m_Children:
   - {fileID: 763360702868488780}
   - {fileID: 763360703214867921}
+  - {fileID: 2338723475956056587}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -356,7 +358,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2.8
+  m_Speed: 2
   m_Acceleration: 80
   avoidancePriority: 30
   m_AngularSpeed: 500
@@ -368,6 +370,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8013895971436690034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763360702561339848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6954e3619d7bb4a46ad17850be8a1924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUIPrefab: {fileID: 6771620603028477302, guid: 83e2776e1a348d74cb442fe70f637430, type: 3}
+  barPoint: {fileID: 2338723475956056587}
+  alwaysVisible: 0
+  visibleTime: 5
 --- !u!1 &763360702581258231
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,4 +959,34 @@ Transform:
   - {fileID: 763360702416817090}
   m_Father: {fileID: 763360703214867921}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2995172045557701927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2338723475956056587}
+  m_Layer: 7
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2338723475956056587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2995172045557701927}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.43, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 763360702561339958}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

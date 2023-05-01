@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3637153579825555714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5156039131989789442}
+  m_Layer: 7
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5156039131989789442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3637153579825555714}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.82, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4987435128538164183}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4981347022002895659
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +446,7 @@ GameObject:
   - component: {fileID: 4983152891252442772}
   - component: {fileID: 4983152891252442775}
   - component: {fileID: 4983152891617454583}
+  - component: {fileID: 1174173667119781770}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Enemy
@@ -436,6 +467,7 @@ Transform:
   m_Children:
   - {fileID: 4983305969310088481}
   - {fileID: 4987341898155505153}
+  - {fileID: 5156039131989789442}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 39.721, z: 0}
@@ -505,7 +537,7 @@ NavMeshAgent:
   m_AngularSpeed: 500
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 0.95
   m_BaseOffset: 0
@@ -523,5 +555,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d4ad700d6edd847acb299a30344b15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterData: {fileID: 11400000, guid: 9fc144f84b7b94f44a554e3962b0b94a, type: 2}
+  templateData: {fileID: 11400000, guid: 9fc144f84b7b94f44a554e3962b0b94a, type: 2}
   attackData: {fileID: 11400000, guid: c45d0e288828399489e44bf2f13cb0bb, type: 2}
+--- !u!114 &1174173667119781770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4982222173099591163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6954e3619d7bb4a46ad17850be8a1924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUIPrefab: {fileID: 6771620603028477302, guid: 83e2776e1a348d74cb442fe70f637430, type: 3}
+  barPoint: {fileID: 5156039131989789442}
+  alwaysVisible: 0
+  visibleTime: 5

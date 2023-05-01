@@ -71,8 +71,19 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Hit() {
-        var targetState = attackTarget.GetComponent<CharacterStats>();
-        targetState.TakeDamage(characterStats, targetState);
+        if (attackTarget != null) {
+            if (attackTarget.CompareTag("Attackable")) {
+                if (attackTarget.GetComponent<Rock>()) {
+                    attackTarget.GetComponent<Rock>().rockStates = Rock.RockStates.HitEnemy;
+                    attackTarget.GetComponent<Rigidbody>().velocity = Vector3.one;
+                    attackTarget.GetComponent<Rigidbody>().AddForce(transform.forward * 20, ForceMode.Impulse);
+                }
+            }
+            else {
+                var targetState = attackTarget.GetComponent<CharacterStats>();
+                targetState.TakeDamage(characterStats, targetState);
+            }
+        }
     }
 
 #endregion
@@ -85,7 +96,7 @@ public class PlayerController : MonoBehaviour {
         agent.isStopped = false;
         transform.LookAt(attackTarget.transform);
         
-        while (Vector3.Distance(transform.position, attackTarget.transform.position) > characterStats.attackData.attackRange) {
+        while (Vector3.Distance(transform.position, attackTarget.transform.position) > characterStats.attackData.attackRange && attackTarget != null) {
             agent.destination = attackTarget.transform.position;
             yield return null;
         }
@@ -93,7 +104,7 @@ public class PlayerController : MonoBehaviour {
         // Attack
         agent.isStopped = true;
 
-        if (lastAttackTime < 0) {
+        if (lastAttackTime < 0 && attackTarget != null) {
             animator.SetBool("Critical", characterStats.attackData.isCritical);
             animator.SetTrigger("Attack");
             // 重置冷却时间

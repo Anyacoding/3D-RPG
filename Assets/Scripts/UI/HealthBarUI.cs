@@ -24,12 +24,14 @@ public class HealthBarUI : MonoBehaviour {
 
     void OnEnable() {
         _camera = Camera.main.transform;
-
         foreach(Canvas canvas in FindObjectsOfType<Canvas>()) {
-            UIbar = Instantiate(healthUIPrefab, canvas.transform).transform;
-            // 取得了BarHolder下的绿色血条的子Image
-            healthSlider = UIbar.GetChild(0).GetComponent<Image>();
-            UIbar.gameObject.SetActive(alwaysVisible);
+            if (canvas.name == "HealthBar Canvas") {
+                UIbar = Instantiate(healthUIPrefab, canvas.transform).transform;
+                // 取得了BarHolder下的绿色血条的子Image
+                healthSlider = UIbar.GetChild(0).GetComponent<Image>();
+                UIbar.gameObject.SetActive(alwaysVisible);
+                break;
+            }
         }
     }
 

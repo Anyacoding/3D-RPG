@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,4 +10,18 @@ public class CharacterData_SO : ScriptableObject {
     public int currentHealth;
     public int baseDefence;
     public int currentDefence;
+
+    [Header("KillPoint")]
+    public int KillPoint;
+
+    [Header("Level")]
+    public int currentLevel;
+    public int maxLevel;
+    public int baseExp;
+    public int currentExp;
+    public float levelBuff;
+
+    
+
+    
 }

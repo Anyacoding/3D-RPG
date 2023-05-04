@@ -38,6 +38,10 @@ public class MouseManager : Singleton<MouseManager> {
                     Cursor.SetCursor(attack, new Vector2(16, 16), CursorMode.Auto);
                     break;
                 }
+                case "Portal": {
+                    Cursor.SetCursor(doorWay, new Vector2(16, 16), CursorMode.Auto);
+                    break;
+                }
             }
         }
     }
@@ -45,6 +49,9 @@ public class MouseManager : Singleton<MouseManager> {
     void MouseControl() {
         if (Input.GetMouseButtonDown(0) && hitInfo.collider != null) {
             if (hitInfo.collider.gameObject.CompareTag("Ground")) {
+                OnMouseClicked?.Invoke(hitInfo.point);
+            }
+            if (hitInfo.collider.gameObject.CompareTag("Portal")) {
                 OnMouseClicked?.Invoke(hitInfo.point);
             }
             if (hitInfo.collider.gameObject.CompareTag("Enemy")) {

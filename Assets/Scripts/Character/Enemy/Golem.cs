@@ -20,9 +20,6 @@ public class Golem : EnemyController  {
             attackTarget.GetComponent<NavMeshAgent>().isStopped = true;
             attackTarget.GetComponent<NavMeshAgent>().velocity = direction * kickForce;
 
-            Debug.Log(direction * kickForce);
-            Debug.Log($"agent: {attackTarget.GetComponent<NavMeshAgent>().velocity}");
-
             attackTarget.GetComponent<Animator>().SetTrigger("Dizzy");
         }
     }

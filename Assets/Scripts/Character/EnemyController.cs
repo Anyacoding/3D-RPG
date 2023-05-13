@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver {
             enemyState = EnemyState.PATROL;
             wayPoint = GetNewWayPoint();
         }
-        // FIX: 场景切换后修改掉
+        // TODO: 场景切换后修改掉
         GameManager.Instance.AddObserver(this);
     }
 

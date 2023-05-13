@@ -18,14 +18,20 @@ public class PlayerController : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         characterStats = GetComponent<CharacterStats>();
+        // UnityEngine.Debug.Log("Awake()");
     }
 
-    void Start() {
+    void OnEnable() {
         // 向事件注册函数
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
-        // 向GameManager注册自身为玩家
         GameManager.Instance.RigisterPlayer(characterStats);
+        // UnityEngine.Debug.Log("OnEnable()");
+    }
+
+    void Start() {
+        // 向GameManager注册自身为玩家
+        SaveManager.Instance.LoadPlayerData();
     }
 
     
@@ -41,6 +47,13 @@ public class PlayerController : MonoBehaviour {
             MouseManager.Instance.OnMouseClicked -= MoveToTarget;
             MouseManager.Instance.OnEnemyClicked -= EventAttack;
         }
+    }
+
+    void OnDisable() {
+        if (MouseManager.IsInitialized == false) return;
+        // 取消订阅
+        MouseManager.Instance.OnMouseClicked -= MoveToTarget;
+        MouseManager.Instance.OnEnemyClicked -= EventAttack;
     }
 
 #endregion

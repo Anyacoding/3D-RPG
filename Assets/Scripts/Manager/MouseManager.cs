@@ -11,7 +11,7 @@ public class MouseManager : Singleton<MouseManager> {
 
     protected override void Awake() {
         base.Awake();
-        // DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
@@ -40,6 +40,10 @@ public class MouseManager : Singleton<MouseManager> {
                 }
                 case "Portal": {
                     Cursor.SetCursor(doorWay, new Vector2(16, 16), CursorMode.Auto);
+                    break;
+                }
+                case "Untagged": {
+                    Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
                     break;
                 }
             }

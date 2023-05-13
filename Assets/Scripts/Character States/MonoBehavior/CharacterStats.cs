@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour {
     public CharacterData_SO templateData;
-    private CharacterData_SO characterData;
+    public CharacterData_SO characterData;
     public AttackData_SO attackData;
     public event Action<int, int> UpdateHealthBarOnAttack;
 
@@ -107,10 +107,6 @@ public class CharacterStats : MonoBehaviour {
         float coreDamage = UnityEngine.Random.Range(attackData.minDamage, attackData.maxDamage);
         if (attackData.isCritical) {
             coreDamage *= attackData.criticalMultiplier;
-            Debug.Log("暴击！ " + coreDamage);
-        }
-        else {
-            Debug.Log("未暴击！ " + coreDamage);
         }
         return (int)coreDamage;
     }

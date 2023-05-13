@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GameManager : Singleton<GameManager> {
     [HideInInspector]
     public CharacterStats playerStats;
     List<IEndGameObserver> endGameObservers;
 
-#region 生命周期
+    private CinemachineFreeLook followCamera;
+
+    #region 生命周期
     protected override void Awake() {
         base.Awake();
+        DontDestroyOnLoad(this);
         endGameObservers = new List<IEndGameObserver>();
     }
 
@@ -27,6 +31,11 @@ public class GameManager : Singleton<GameManager> {
 #region 订阅函数
     public void RigisterPlayer(CharacterStats player) {
         playerStats = player;
+        followCamera = FindObjectOfType<CinemachineFreeLook>();
+        if (followCamera != null) {
+            followCamera.Follow = playerStats.transform;
+            followCamera.LookAt = playerStats.transform.GetChild(2);
+        }
     }
 
     public void AddObserver(IEndGameObserver observer) {
@@ -46,5 +55,14 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 #endregion
+
+    public Transform GetEntrance() {
+        foreach (var item in FindObjectsOfType<TransitionDestination>()) {
+            if (item.destinationTag == TransitionDestination.DestinationTag.ENETER || item.destinationTag == TransitionDestination.DestinationTag.ROOM) {
+                return item.transform;
+            }
+        }
+        return null;
+    }
 
 }

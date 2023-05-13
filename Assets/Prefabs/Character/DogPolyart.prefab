@@ -1018,6 +1018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   templateData: {fileID: 11400000, guid: 699a736ea67f8db4a906166b135c7216, type: 2}
+  characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 55c5e01c6ee04f9489a95f0e7ad4635a, type: 2}
 --- !u!54 &952994105
 Rigidbody:

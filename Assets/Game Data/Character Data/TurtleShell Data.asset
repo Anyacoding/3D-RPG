@@ -19,6 +19,6 @@ MonoBehaviour:
   KillPoint: 15
   currentLevel: 0
   maxLevel: 0
-  baseExp: 0
+  baseExp: 99
   currentExp: 0
   levelBuff: 0

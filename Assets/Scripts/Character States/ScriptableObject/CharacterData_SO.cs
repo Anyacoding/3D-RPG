@@ -20,8 +20,4 @@ public class CharacterData_SO : ScriptableObject {
     public int baseExp;
     public int currentExp;
     public float levelBuff;
-
-    
-
-    
 }

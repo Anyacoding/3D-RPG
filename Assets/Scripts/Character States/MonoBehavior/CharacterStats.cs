@@ -9,7 +9,10 @@ public class CharacterStats : MonoBehaviour {
     public AttackData_SO attackData;
     public event Action<int, int> UpdateHealthBarOnAttack;
 
-    #region 生命周期
+    [Header("Weapon")]
+    public Transform weaponSlot;
+
+#region 生命周期
     void Awake() {
         // 深拷贝
         if (templateData != null) {
@@ -72,7 +75,6 @@ public class CharacterStats : MonoBehaviour {
 
 #endregion
 
-
 #region Character Combat
     public void TakeDamage(CharacterStats attacker, CharacterStats defender) {
         int damage = Math.Max(attacker.CurrentDamage() - CurrentDefence, 0);
@@ -84,7 +86,7 @@ public class CharacterStats : MonoBehaviour {
 
         defender.UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
 
-        // DONE: 经验升级
+        // 经验升级
         if (defender.CurrentHealth <= 0) {
             attacker.UpdateExp(defender.characterData.KillPoint);
         }
@@ -96,7 +98,7 @@ public class CharacterStats : MonoBehaviour {
 
         defender.UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
 
-        // DONE: 经验升级
+        // 经验升级
         if (defender.CurrentHealth <= 0) {
             var attacker = GameManager.Instance.playerStats;
             attacker.UpdateExp(defender.characterData.KillPoint);
@@ -131,4 +133,14 @@ public class CharacterStats : MonoBehaviour {
 
 #endregion
 
+#region Equip Weapon
+    public void EquipWeapon(ItemData_SO weapon) {
+        if (weapon.weaponPrefab != null) {
+            Instantiate(weapon.weaponPrefab, weaponSlot);
+            // DONE: 更新属性
+            attackData.ApplyWeaponData(weapon.weaponData);
+        }
+    }
+
+#endregion
 }

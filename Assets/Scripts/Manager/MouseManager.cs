@@ -42,6 +42,10 @@ public class MouseManager : Singleton<MouseManager> {
                     Cursor.SetCursor(doorWay, new Vector2(16, 16), CursorMode.Auto);
                     break;
                 }
+                case "Item": {
+                    Cursor.SetCursor(point, new Vector2(16, 16), CursorMode.Auto);
+                    break;
+                }
                 case "Untagged": {
                     Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
                     break;
@@ -63,6 +67,9 @@ public class MouseManager : Singleton<MouseManager> {
             }
             if (hitInfo.collider.gameObject.CompareTag("Attackable")) {
                 OnEnemyClicked?.Invoke(hitInfo.collider.gameObject);
+            }
+            if (hitInfo.collider.gameObject.CompareTag("Item")) {
+                OnMouseClicked?.Invoke(hitInfo.point);
             }
         }
     }

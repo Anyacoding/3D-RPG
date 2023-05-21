@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7aeb8739d3bdc249bb4bf6b5d3a1dca, type: 3}
+  m_Name: Sword
+  m_EditorClassIdentifier: 
+  itemType: 1
+  itemName: Word
+  itemIcon: {fileID: 21300000, guid: cfa35f5e1c88be348b31a21c06b35c25, type: 3}
+  itemAmount: 1
+  description: "\u6751\u597D\u5251"
+  stackable: 0
+  weaponPrefab: {fileID: 9202624582993037544, guid: df46ebc9cb55ebd41a4739b899ea2a01, type: 3}
+  weaponData: {fileID: 11400000, guid: 39faa24801b86c74cbdf2a3d4ed5e7ac, type: 2}

@@ -19,4 +19,15 @@ public class AttackData_SO : ScriptableObject {
     [HideInInspector]
     public bool isCritical;
 
+    public void ApplyWeaponData(AttackData_SO weapon) {
+        attackRange = weapon.attackRange;
+        coolDown = weapon.coolDown;
+        
+        minDamage = weapon.minDamage;
+        maxDamage = weapon.maxDamage;
+
+        criticalMultiplier = weapon.criticalMultiplier;
+        criticalChance = weapon.criticalChance;
+    }
+
 }

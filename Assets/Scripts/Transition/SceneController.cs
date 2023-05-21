@@ -43,9 +43,8 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver {
     }
 
     IEnumerator Transition(string sceneName, TransitionDestination.DestinationTag destinationTag) {
-        // DONE: 保存数据
+        // 保存数据
         SaveManager.Instance.SavePlayerData();
-
         // 判断是否是当前场景
         if (SceneManager.GetActiveScene().name != sceneName) {
             yield return SceneManager.LoadSceneAsync(sceneName);

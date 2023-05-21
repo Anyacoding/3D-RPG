@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         characterStats = GetComponent<CharacterStats>();
-        // UnityEngine.Debug.Log("Awake()");
+        UnityEngine.Debug.Log("Awake()");
     }
 
     void OnEnable() {
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
         GameManager.Instance.RigisterPlayer(characterStats);
-        // UnityEngine.Debug.Log("OnEnable()");
+        UnityEngine.Debug.Log("OnEnable()");
     }
 
     void Start() {

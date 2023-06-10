@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 public class MouseManager : Singleton<MouseManager> {
     private RaycastHit hitInfo;
@@ -14,8 +15,12 @@ public class MouseManager : Singleton<MouseManager> {
         DontDestroyOnLoad(this);
     }
 
-    // Update is called once per frame
     void Update() {
+        // 如果是跟UI交互，设置鼠标图标然后那么直接返回
+        if (InteractWithUI()) {
+            Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
+            return;
+        }
         SetCursorTexture();
         MouseControl();
     }
@@ -46,7 +51,7 @@ public class MouseManager : Singleton<MouseManager> {
                     Cursor.SetCursor(point, new Vector2(16, 16), CursorMode.Auto);
                     break;
                 }
-                case "Untagged": {
+                default: {
                     Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
                     break;
                 }
@@ -72,5 +77,10 @@ public class MouseManager : Singleton<MouseManager> {
                 OnMouseClicked?.Invoke(hitInfo.point);
             }
         }
+    }
+
+
+    bool InteractWithUI() {
+        return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
     }
 }

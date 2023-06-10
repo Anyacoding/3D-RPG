@@ -7,6 +7,7 @@ public class CharacterStats : MonoBehaviour {
     public CharacterData_SO templateData;
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
+    private AttackData_SO baseAttackData;
     public event Action<int, int> UpdateHealthBarOnAttack;
 
     [Header("Weapon")]
@@ -18,6 +19,8 @@ public class CharacterStats : MonoBehaviour {
         if (templateData != null) {
             characterData = Instantiate(templateData);
         }
+        // 拷贝一份原始属性
+        baseAttackData = Instantiate(attackData);
     }
 
 #endregion
@@ -134,13 +137,34 @@ public class CharacterStats : MonoBehaviour {
 #endregion
 
 #region Equip Weapon
+    public void ChangeWeapon(ItemData_SO weapon) {
+        UnEquipWeapon();
+        EquipWeapon(weapon);
+    }
+
     public void EquipWeapon(ItemData_SO weapon) {
         if (weapon.weaponPrefab != null) {
             Instantiate(weapon.weaponPrefab, weaponSlot);
             // DONE: 更新属性
+            // TODO: 切换动画
             attackData.ApplyWeaponData(weapon.weaponData);
         }
     }
 
+    public void UnEquipWeapon() {
+        if (weaponSlot.transform.childCount != 0) {
+            for (int i = 0; i < weaponSlot.transform.childCount; ++i) {
+                Destroy(weaponSlot.transform.GetChild(i).gameObject);
+            }
+        }
+        attackData.ApplyWeaponData(baseAttackData);
+        // TODO: 切换动画
+    }
+#endregion
+
+#region Apply Data Change
+    public void ApplyHealth(int amount) {
+        CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, MaxHealth);
+    }
 #endregion
 }

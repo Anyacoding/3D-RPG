@@ -11,6 +11,10 @@ public class ItemUI : MonoBehaviour {
     public int Index { get; set; } = -1;
 
     public void SetUpItemUI(InventoryItem inventoryItem) {
+        if (inventoryItem.amount == 0) {
+            Bag.items[Index].itemData = null;
+        }
+
         if (inventoryItem.itemData != null) {
             icon.sprite = inventoryItem.itemData.itemIcon;
             amount.text = inventoryItem.amount.ToString();
@@ -19,5 +23,9 @@ public class ItemUI : MonoBehaviour {
         else {
             icon.gameObject.SetActive(false);
         }
+    }
+
+    public ItemData_SO GetItem() {
+        return Bag.items[Index].itemData;
     }
 }

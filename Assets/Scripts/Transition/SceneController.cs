@@ -51,7 +51,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver {
             var entranc = GetDestination(destinationTag);
             yield return Instantiate(playerPrefab, entranc.transform.position, entranc.transform.rotation);
             // 加载数据
-            SaveManager.Instance.LoadPlayerData();
+            // SaveManager.Instance.LoadPlayerData();
             yield break;
         }
         else {

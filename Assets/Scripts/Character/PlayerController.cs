@@ -25,12 +25,13 @@ public class PlayerController : MonoBehaviour {
         // 向事件注册函数
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
+        // 向GameManager注册自身为玩家
         GameManager.Instance.RigisterPlayer(characterStats);
         UnityEngine.Debug.Log("OnEnable()");
     }
 
     void Start() {
-        // 向GameManager注册自身为玩家
+        // 加载存档
         SaveManager.Instance.LoadPlayerData();
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : Singleton<InventoryManager> {
     public class DragData {
@@ -26,8 +27,20 @@ public class InventoryManager : Singleton<InventoryManager> {
     public Canvas dragCanvas;
     public DragData currentDrag;
 
+    [Header("UI Panel")]
+    public GameObject bagPanel;
+    public GameObject statesPanel;
+    private bool isOpen = false;
 
-#region 生命周期函数
+    [Header("States Text")]
+    public Text healthText;
+    public Text attackText;
+
+    [Header("Tool Tip")]
+    public ItemToolTip toolTip;
+
+
+    #region 生命周期函数
     protected override void Awake() {
         base.Awake();
         if (bagDataTemplate != null) {
@@ -41,10 +54,19 @@ public class InventoryManager : Singleton<InventoryManager> {
         }
     }
 
-    void Start() {
+    private void Start() {
         bagUI.RefreshUI();
         actionUI.RefreshUI();
         equipmentUI.RefreshUI();
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.B)) {
+            isOpen = !isOpen;
+            bagPanel.SetActive(isOpen);
+            statesPanel.SetActive(isOpen);
+        }
+        UpdateStatesText(GameManager.Instance.playerStats.MaxHealth, GameManager.Instance.playerStats.attackData.minDamage);
     }
 #endregion
 
@@ -79,4 +101,9 @@ public class InventoryManager : Singleton<InventoryManager> {
         return false;
     }
 #endregion
+
+    public void UpdateStatesText(int health, int attack) {
+        healthText.text = health.ToString();
+        attackText.text = attack.ToString();
+    }
 }

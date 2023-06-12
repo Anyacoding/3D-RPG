@@ -57,17 +57,19 @@ public class EnemyController : MonoBehaviour, IEndGameObserver {
             enemyState = EnemyState.PATROL;
             wayPoint = GetNewWayPoint();
         }
-        // TODO: 场景切换后修改掉
-        GameManager.Instance.AddObserver(this);
     }
 
     void OnEnable() {
-        
+        GameManager.Instance.AddObserver(this);
     }
 
     void OnDisable() {
         if (GameManager.IsInitialized) {
             GameManager.Instance.RemoveObserver(this);
+        }
+        // 死亡掉落物体
+        if (GetComponent<LootSpawner>() && isDead) {
+            GetComponent<LootSpawner>().SpawnLoot();
         }
     }
 

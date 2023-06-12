@@ -8,6 +8,7 @@ public class CharacterStats : MonoBehaviour {
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
     private AttackData_SO baseAttackData;
+    private RuntimeAnimatorController baseAnimatorController;
     public event Action<int, int> UpdateHealthBarOnAttack;
 
     [Header("Weapon")]
@@ -21,6 +22,7 @@ public class CharacterStats : MonoBehaviour {
         }
         // 拷贝一份原始属性
         baseAttackData = Instantiate(attackData);
+        baseAnimatorController = GetComponent<Animator>().runtimeAnimatorController;
     }
 
 #endregion
@@ -146,8 +148,9 @@ public class CharacterStats : MonoBehaviour {
         if (weapon.weaponPrefab != null) {
             Instantiate(weapon.weaponPrefab, weaponSlot);
             // DONE: 更新属性
-            // TODO: 切换动画
+            // DONE: 切换动画
             attackData.ApplyWeaponData(weapon.weaponData);
+            GetComponent<Animator>().runtimeAnimatorController = weapon.weaponAnimatorController;
         }
     }
 
@@ -158,8 +161,11 @@ public class CharacterStats : MonoBehaviour {
             }
         }
         attackData.ApplyWeaponData(baseAttackData);
-        // TODO: 切换动画
+        // DONE: 切换动画
+        GetComponent<Animator>().runtimeAnimatorController = baseAnimatorController;
     }
+
+    // TODO: 装备盾牌
 #endregion
 
 #region Apply Data Change

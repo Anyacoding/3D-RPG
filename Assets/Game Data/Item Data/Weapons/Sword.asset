@@ -21,3 +21,4 @@ MonoBehaviour:
   useableItemData: {fileID: 0}
   weaponPrefab: {fileID: 9202624582993037544, guid: df46ebc9cb55ebd41a4739b899ea2a01, type: 3}
   weaponData: {fileID: 11400000, guid: 39faa24801b86c74cbdf2a3d4ed5e7ac, type: 2}
+  weaponAnimatorController: {fileID: 22100000, guid: f78557c07644c414ca81fe884a2342a7, type: 2}

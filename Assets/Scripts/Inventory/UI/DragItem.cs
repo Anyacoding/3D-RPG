@@ -38,9 +38,16 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 else {
                     targetSlotUI = eventData.pointerEnter.gameObject.GetComponentInParent<SlotUI>();
                 }
+
                 switch(targetSlotUI.slotType) {
                     case SlotType.BAG: {
-                        SwapItem();
+                        // DONE: 有bug，可以通过交互蘑菇使得剑进入action bar
+                        if (currentSlotUI.slotType == SlotType.WEAPON && (targetSlotUI.itemUI.GetItem() == null || targetSlotUI.itemUI.GetItem().itemType == ItemType.WEAPON))
+                            SwapItem();
+                        else if (currentSlotUI.slotType == SlotType.ACTION && (targetSlotUI.itemUI.GetItem() == null || targetSlotUI.itemUI.GetItem().itemType == ItemType.USEABLE))
+                            SwapItem();  
+                        else if (currentSlotUI.slotType == SlotType.BAG)
+                            SwapItem();  
                         break;
                     }
                     case SlotType.WEAPON: {
@@ -89,7 +96,6 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             tempItem.amount = 0;
         }
         else {
-            // TODO: 有bug，可以通过交互蘑菇使得剑进入action bar
             currentSlotUI.itemUI.Bag.items[currentSlotUI.itemUI.Index] = targetItem;
             targetSlotUI.itemUI.Bag.items[targetSlotUI.itemUI.Index] = tempItem;
         }

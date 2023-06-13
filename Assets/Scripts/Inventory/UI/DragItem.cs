@@ -86,6 +86,8 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }
 
     public void SwapItem() {
+        if (targetSlotUI == currentSlotUI) return;
+
         var targetItem = targetSlotUI.itemUI.Bag.items[targetSlotUI.itemUI.Index];
         var tempItem = currentSlotUI.itemUI.Bag.items[currentSlotUI.itemUI.Index];
         bool isSameItem = tempItem.itemData == targetItem.itemData;

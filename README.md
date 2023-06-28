@@ -18,11 +18,6 @@
 - Load: 按下 ```L``` 加载最新的存档
 - Quit: 按下 ```ESC``` 退出程序
 
-## 游戏截图
-![背包系统](https://anya-1308928365.cos.ap-nanjing.myqcloud.com/blog/QQ图片20230628230355.png)
-
-![Boss](https://anya-1308928365.cos.ap-nanjing.myqcloud.com/blog/QQ图片20230628230733.png)
-
 ## 实现的主要功能
 
 ### 场景切换系统
@@ -45,4 +40,9 @@
     - [x] 快捷栏物品使用
     - [x] 武器栏交互
     - [x] 人物状态栏实时动画（RenderTexture）
+
+## 游戏截图
+![背包系统](https://anya-1308928365.cos.ap-nanjing.myqcloud.com/blog/QQ图片20230628230355.png)
+
+![Boss](https://anya-1308928365.cos.ap-nanjing.myqcloud.com/blog/QQ图片20230628230733.png)
 

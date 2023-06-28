@@ -18,29 +18,31 @@
 - Load: 按下 ```L``` 加载最新的存档
 - Quit: 按下 ```ESC``` 退出程序
 
+## 游戏截图
+![背包系统](https://anya-1308928365.cos.ap-nanjing.myqcloud.com/blog/QQ图片20230628230355.png)
+
+![Boss](https://anya-1308928365.cos.ap-nanjing.myqcloud.com/blog/QQ图片20230628230733.png)
+
 ## 实现的主要功能
-- [x] 场景切换系统
+
+### 场景切换系统
     - [x] 同场景传送门
     - [x] 不同场景传送门
     - [x] 场景切换的淡入与淡出
-- [x] 数值系统（ScriptableObject）
+### 数值系统（ScriptableObject）
     - [x] 人物状态数值
     - [x] 人物攻击数值
     - [x] 武器攻击数值/物品增益数值
-- [x] 战斗系统
+### 战斗系统
     - [x] 人物暴击时特殊动画
     - [x] 敌人 AI 状态机
     - [x] Boss 抛掷石块命中时的碎石以及击退效果
-- [x] 存档系统（PlayerPrefs + Json）
+### 存档系统（PlayerPrefs + Json）
     - [x] 存档保存
     - [x] 存档加载
-- [x] 背包系统
+### 背包系统
     - [x] 物品拖拽
     - [x] 快捷栏物品使用
     - [x] 武器栏交互
     - [x] 人物状态栏实时动画（RenderTexture）
 
-## 游戏截图
-![背包系统](https://anya-1308928365.cos.ap-nanjing.myqcloud.com/blog/QQ图片20230628230355.png)
-
-![Boss](https://anya-1308928365.cos.ap-nanjing.myqcloud.com/blog/QQ图片20230628230733.png)

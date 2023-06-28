@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
@@ -97,6 +98,7 @@ public class PlayerController : MonoBehaviour {
                 var targetState = attackTarget.GetComponent<CharacterStats>();
                 targetState.TakeDamage(characterStats, targetState);
             }
+            
         }
     }
 
